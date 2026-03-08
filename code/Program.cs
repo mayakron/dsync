@@ -11,7 +11,7 @@ namespace DSync
 
         private const int SuccessExitCode = 0;
 
-        private const string Version = "3.5.0";
+        private const string Version = "3.5.1";
 
         private static int Main(string[] args)
         {

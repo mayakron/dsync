@@ -15,9 +15,7 @@ namespace DSync.Models
 
         public bool ShouldUpdateContent;
 
-        public bool ShouldUpdateLastWriteTime;
-
-        public bool ShouldUpdateNameCasing;
+        public bool ShouldUpdateName;
 
         public FileSystemEntryPair(FileSystemEntry sourceFileSystemEntry, FileSystemEntry destinationFileSystemEntry)
         {

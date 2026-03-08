@@ -122,7 +122,7 @@ namespace DSync.Utilities
                             currentItem = new FileSystemEntryPair(sourceDirectory, destinationDirectory);
                         }
 
-                        currentItem.ShouldUpdateNameCasing = true;
+                        currentItem.ShouldUpdateName = true;
                     }
 
                     if (FileSystemEntryPair.AttributesAreDifferent(sourceDirectory, destinationDirectory, significantAttributesMask))
@@ -201,7 +201,7 @@ namespace DSync.Utilities
                                     currentItem = new FileSystemEntryPair(sourceFile, destinationFile);
                                 }
 
-                                currentItem.ShouldUpdateNameCasing = true;
+                                currentItem.ShouldUpdateName = true;
                             }
 
                             if (FileSystemEntryPair.AttributesAreDifferent(sourceFile, destinationFile, significantAttributesMask))
@@ -214,17 +214,7 @@ namespace DSync.Utilities
                                 currentItem.ShouldUpdateAttributes = true;
                             }
 
-                            if (FileSystemEntryPair.LastWriteTimeIsDifferent(sourceFile, destinationFile))
-                            {
-                                if (currentItem == null)
-                                {
-                                    currentItem = new FileSystemEntryPair(sourceFile, destinationFile);
-                                }
-
-                                currentItem.ShouldUpdateLastWriteTime = true;
-                            }
-
-                            if (FileSystemEntryPair.SizeIsDifferent(sourceFile, destinationFile))
+                            if (FileSystemEntryPair.LastWriteTimeIsDifferent(sourceFile, destinationFile) || FileSystemEntryPair.SizeIsDifferent(sourceFile, destinationFile))
                             {
                                 if (currentItem == null)
                                 {
@@ -278,7 +268,7 @@ namespace DSync.Utilities
                                     currentItem = new FileSystemEntryPair(sourceFile, destinationFile);
                                 }
 
-                                currentItem.ShouldUpdateNameCasing = true;
+                                currentItem.ShouldUpdateName = true;
                             }
 
                             if (FileSystemEntryPair.AttributesAreDifferent(sourceFile, destinationFile, significantAttributesMask))
@@ -291,17 +281,7 @@ namespace DSync.Utilities
                                 currentItem.ShouldUpdateAttributes = true;
                             }
 
-                            if (FileSystemEntryPair.LastWriteTimeIsDifferent(sourceFile, destinationFile))
-                            {
-                                if (currentItem == null)
-                                {
-                                    currentItem = new FileSystemEntryPair(sourceFile, destinationFile);
-                                }
-
-                                currentItem.ShouldUpdateLastWriteTime = true;
-                            }
-
-                            if (FileSystemEntryPair.SizeIsDifferent(sourceFile, destinationFile))
+                            if (FileSystemEntryPair.LastWriteTimeIsDifferent(sourceFile, destinationFile) || FileSystemEntryPair.SizeIsDifferent(sourceFile, destinationFile))
                             {
                                 if (currentItem == null)
                                 {
@@ -392,7 +372,7 @@ namespace DSync.Utilities
 
                         filesToUpdate.Add(currentItem);
                     }
-                    else if (currentItem.ShouldUpdateNameCasing || currentItem.ShouldUpdateAttributes || currentItem.ShouldUpdateLastWriteTime)
+                    else if (currentItem.ShouldUpdateName || currentItem.ShouldUpdateAttributes)
                     {
                         filesToUpdate.Add(currentItem);
                     }
@@ -501,7 +481,7 @@ namespace DSync.Utilities
 
                     if (!whatIf)
                     {
-                        if (currentItem.ShouldUpdateNameCasing)
+                        if (currentItem.ShouldUpdateName)
                         {
                             IOEngine.RenameDirectoryInTwoPhases(currentItem.DestinationFileSystemEntry.AbsolutePath, currentItem.DestinationFileSystemEntry.ParentPath, currentItem.SourceFileSystemEntry.Name);
                         }
@@ -563,7 +543,7 @@ namespace DSync.Utilities
                         }
                         else
                         {
-                            if (currentItem.ShouldUpdateNameCasing)
+                            if (currentItem.ShouldUpdateName)
                             {
                                 IOEngine.RenameFileInTwoPhases(currentItem.DestinationFileSystemEntry.AbsolutePath, currentItem.DestinationFileSystemEntry.ParentPath, currentItem.SourceFileSystemEntry.Name);
                             }
@@ -571,11 +551,6 @@ namespace DSync.Utilities
                             if (currentItem.ShouldUpdateAttributes)
                             {
                                 IOEngine.SetFileOrDirectoryAttributes(currentItem.DestinationFileSystemEntry.AbsolutePath, currentItem.SourceFileSystemEntry.Attributes, significantAttributesMask);
-                            }
-
-                            if (currentItem.ShouldUpdateLastWriteTime)
-                            {
-                                IOEngine.SetFileOrDirectoryLastWriteTime(currentItem.DestinationFileSystemEntry.AbsolutePath, currentItem.SourceFileSystemEntry.LastWriteTime);
                             }
                         }
                     }
