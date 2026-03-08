@@ -11,7 +11,7 @@ namespace DSync
 
         private const int SuccessExitCode = 0;
 
-        private const string Version = "3.5.1";
+        private const string Version = "3.5.2";
 
         private static int Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace DSync
 
                 CommandLine.SetVersion(Version);
 
-                CommandLine.SetSyntax("/SourceDirectoryPath=<String> /DestinationDirectoryPath=<String> [/DiffMode=<String>] [/DiffCulture=<String>] [/PurgeDestinationDirectory] [/ExcludedRelativeFilePaths=<String>] [/ExcludedRelativeDirectoryPaths=<String>] [/WhatIf] [/Trace]");
+                CommandLine.SetSyntax("/SourceDirectoryPath=<String> /DestinationDirectoryPath=<String> [/DiffMode=<String>] [/PurgeDestinationDirectory] [/ExcludedRelativeFilePaths=<String>] [/ExcludedRelativeDirectoryPaths=<String>] [/WhatIf] [/Trace]");
 
                 CommandLine.AddParameter("/SourceDirectoryPath", "The source directory path.", () => true, (value) => sourceDirectoryPath = NormalizeDirectoryPath(value));
                 CommandLine.AddParameter("/DestinationDirectoryPath", "The destination directory path.", () => true, (value) => destinationDirectoryPath = NormalizeDirectoryPath(value));

@@ -559,7 +559,7 @@ namespace DSync.Utilities
 
             // Sync completed.
 
-            Console.WriteLine($"Sync completed using {(parallelIOSuggested ? "parallel" : "sequential")} I/O.");
+            Console.WriteLine($"Sync completed (using {(parallelIOSuggested ? "parallel" : "sequential")} I/O).");
         }
 
         private static bool ParallelIOSuggested(string sourceDirectoryPath, string destinationDirectoryPath)
